@@ -3,56 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>4ever Pump</title>
+  <title>4ever Pump - GunnarB</title>
   <style>
-    /* GENERAL STYLING */
-    * {margin:0; padding:0; box-sizing:border-box;}
-    body {font-family: Arial, sans-serif; color:white; overflow-x:hidden;}
-
-    /* SCROLLING SECTIONS */
+    body {margin:0; padding:0; font-family:Arial; color:white; overflow-x:hidden;}
     section {height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center; padding:50px;}
-    
-    /* BLUE GALAXY BACKGROUND WITH ANIMATION */
-    body {
-      background: linear-gradient(270deg, #0f0c29, #002b5b, #004e92);
-      background-size: 600% 600%;
-      animation: gradientBG 30s ease infinite;
-    }
-    @keyframes gradientBG {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
-    }
-
-    /* STAR EFFECTS */
+    body {background: linear-gradient(270deg, #0f0c29, #002b5b, #004e92); background-size: 600% 600%; animation: gradientBG 30s ease infinite;}
+    @keyframes gradientBG {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
     .star {position:absolute; width:2px; height:2px; background:white; border-radius:50%; animation: twinkle 5s linear infinite;}
     @keyframes twinkle {0%,100%{opacity:0.2;}50%{opacity:1;}}
-
-    /* HEADER / HERO SECTION */
-    h1 {font-size:80px; margin-bottom:20px; text-shadow: 0 0 20px #00f, 0 0 40px #00f;}
-    p {font-size:24px; max-width:700px; margin-bottom:40px; text-shadow: 0 0 10px #000;}
-    .btn {background: linear-gradient(45deg, #00f, #0ff); color:white; text-decoration:none; padding:20px 50px; font-size:24px; border-radius:12px; box-shadow:0 0 20px #00f,0 0 40px #0ff; transition:0.3s;}
+    h1 {font-size:80px; margin-bottom:20px; text-shadow:0 0 20px #00f, 0 0 40px #0ff;}
+    p {font-size:24px; max-width:700px; margin-bottom:40px; text-shadow:0 0 10px #000;}
+    .btn {background: linear-gradient(45deg,#00f,#0ff); color:white; text-decoration:none; padding:20px 50px; font-size:24px; border-radius:12px; box-shadow:0 0 20px #00f,0 0 40px #0ff; transition:0.3s;}
     .btn:hover {box-shadow:0 0 40px #00f,0 0 80px #0ff; transform:scale(1.08);}
-
-    /* ADDITIONAL SECTIONS */
-    section:nth-child(even) {background: rgba(0,0,50,0.5);}
-    section h2 {font-size:50px; margin-bottom:20px; text-shadow: 0 0 15px #0ff;}
-    section p {font-size:20px; max-width:600px; text-shadow:0 0 8px #000;}
-
-    /* SCROLL ANIMATION */
-    .fade-in {opacity:0; transform: translateY(50px); transition: all 1s ease;}
-    .fade-in.visible {opacity:1; transform: translateY(0);}
+    section:nth-child(even){background:rgba(0,0,50,0.5);}
+    section h2{font-size:50px; margin-bottom:20px; text-shadow:0 0 15px #0ff;}
+    section p{font-size:20px; max-width:600px; text-shadow:0 0 8px #000;}
+    .fade-in{opacity:0; transform:translateY(50px); transition:all 1s ease;}
+    .fade-in.visible{opacity:1; transform:translateY(0);}
   </style>
 </head>
 <body>
-  <!-- HERO SECTION -->
   <section>
     <h1>4ever Pump</h1>
     <p>Fuel your energy, mindset, and grind — anytime, anywhere.</p>
     <a href="#section2" class="btn">Explore More</a>
   </section>
 
-  <!-- ADDITIONAL CONTENT -->
   <section id="section2" class="fade-in">
     <h2>Unstoppable Vibes</h2>
     <p>Experience the ultimate boost with 4ever Pump — for your body, mind, and soul.</p>
@@ -63,9 +39,8 @@
     <p>Push beyond limits and achieve what others only dream of. 4ever Pump is your companion.</p>
   </section>
 
-  <!-- STAR ANIMATION SCRIPT -->
   <script>
-    // CREATE STARS
+    // Stars
     const bodyEl = document.body;
     for(let i=0; i<150; i++){
       const star = document.createElement('div');
@@ -77,20 +52,17 @@
       bodyEl.appendChild(star);
     }
 
-    // SCROLL FADE-IN EFFECT
+    // Scroll fade-in
     const faders = document.querySelectorAll('.fade-in');
-    const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
-    const appearOnScroll = new IntersectionObserver(function(entries, observer){
-      entries.forEach(entry => {
+    const appearOptions = {threshold:0.2, rootMargin:"0px 0px -50px 0px"};
+    const appearOnScroll = new IntersectionObserver(function(entries,observer){
+      entries.forEach(entry=>{
         if(!entry.isIntersecting) return;
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       });
     }, appearOptions);
-
-    faders.forEach(fader => { appearOnScroll.observe(fader); });
+    faders.forEach(fader=>{appearOnScroll.observe(fader);});
   </script>
 </body>
 </html>
-connect the link to https://gunnarb.com 
-connect to gunnarb.com
