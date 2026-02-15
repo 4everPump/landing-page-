@@ -5,33 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>4ever Pump</title>
   <style>
-    body { margin:0; padding:0; font-family:Arial; text-align:center; color:#fff;
-      height:100vh; overflow:hidden;
-      background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
-      background-size: 400% 400%; animation: gradient 15s ease infinite;
+    /* GENERAL STYLING */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family: Arial, sans-serif; color:white; overflow-x:hidden;}
+
+    /* SCROLLING SECTIONS */
+    section {height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center; padding:50px;}
+    
+    /* BLUE GALAXY BACKGROUND WITH ANIMATION */
+    body {
+      background: linear-gradient(270deg, #0f0c29, #002b5b, #004e92);
+      background-size: 600% 600%;
+      animation: gradientBG 30s ease infinite;
     }
-    @keyframes gradient {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+    @keyframes gradientBG {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    /* STAR EFFECTS */
     .star {position:absolute; width:2px; height:2px; background:white; border-radius:50%; animation: twinkle 5s linear infinite;}
     @keyframes twinkle {0%,100%{opacity:0.2;}50%{opacity:1;}}
-    header {position:relative; z-index:2; padding:120px 20px;}
-    h1 {font-size:70px; margin-bottom:20px; text-shadow:2px 2px 15px #ff0000;}
-    p {font-size:24px; max-width:650px; margin:0 auto 50px; text-shadow:1px 1px 8px #000;}
-    .btn {background: linear-gradient(45deg, #ff0044, #ff6699); color:white; text-decoration:none; padding:25px 60px; font-size:24px; border-radius:12px; box-shadow:0 0 20px #ff0044,0 0 40px #ff6699; transition:0.3s;}
-    .btn:hover {box-shadow:0 0 40px #ff0044,0 0 80px #ff6699; transform:scale(1.08);}
+
+    /* HEADER / HERO SECTION */
+    h1 {font-size:80px; margin-bottom:20px; text-shadow: 0 0 20px #00f, 0 0 40px #00f;}
+    p {font-size:24px; max-width:700px; margin-bottom:40px; text-shadow: 0 0 10px #000;}
+    .btn {background: linear-gradient(45deg, #00f, #0ff); color:white; text-decoration:none; padding:20px 50px; font-size:24px; border-radius:12px; box-shadow:0 0 20px #00f,0 0 40px #0ff; transition:0.3s;}
+    .btn:hover {box-shadow:0 0 40px #00f,0 0 80px #0ff; transform:scale(1.08);}
+
+    /* ADDITIONAL SECTIONS */
+    section:nth-child(even) {background: rgba(0,0,50,0.5);}
+    section h2 {font-size:50px; margin-bottom:20px; text-shadow: 0 0 15px #0ff;}
+    section p {font-size:20px; max-width:600px; text-shadow:0 0 8px #000;}
+
+    /* SCROLL ANIMATION */
+    .fade-in {opacity:0; transform: translateY(50px); transition: all 1s ease;}
+    .fade-in.visible {opacity:1; transform: translateY(0);}
   </style>
 </head>
 <body>
-  <header>
+  <!-- HERO SECTION -->
+  <section>
     <h1>4ever Pump</h1>
-    <p>Fuel your energy, mindset, and grind — anytime, anywhere. Experience unstoppable vibes with 4ever Pump!</p>
-    <a href="#" class="btn">Get Started</a>
-  </header>
+    <p>Fuel your energy, mindset, and grind — anytime, anywhere.</p>
+    <a href="#section2" class="btn">Explore More</a>
+  </section>
+
+  <!-- ADDITIONAL CONTENT -->
+  <section id="section2" class="fade-in">
+    <h2>Unstoppable Vibes</h2>
+    <p>Experience the ultimate boost with 4ever Pump — for your body, mind, and soul.</p>
+  </section>
+
+  <section class="fade-in">
+    <h2>Fuel Your Passion</h2>
+    <p>Push beyond limits and achieve what others only dream of. 4ever Pump is your companion.</p>
+  </section>
+
+  <!-- STAR ANIMATION SCRIPT -->
   <script>
-    const body=document.body; for(let i=0;i<100;i++){const star=document.createElement('div'); star.classList.add('star');
-    star.style.top=Math.random()*window.innerHeight+'px'; star.style.left=Math.random()*window.innerWidth+'px';
-    star.style.width=Math.random()*3+1+'px'; star.style.height=star.style.width; star.style.animationDuration=(Math.random()*5+2)+'s';
-    body.appendChild(star);}
+    // CREATE STARS
+    const bodyEl = document.body;
+    for(let i=0; i<150; i++){
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.width = star.style.height = Math.random()*3 + 1 + 'px';
+      star.style.animationDuration = (Math.random()*5 + 2) + 's';
+      bodyEl.appendChild(star);
+    }
+
+    // SCROLL FADE-IN EFFECT
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
   </script>
 </body>
 </html>
-
